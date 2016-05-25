@@ -11,14 +11,14 @@
 set -e
 set -x
 
-url="https://codeload.github.com/wakatime/wakatime/zip/master"
+url="https://codeload.github.com/itimetrack/itimetrack/zip/master"
 if [ -d "$INSTALL_DIR" ]; then
     extract_to="$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH"
 else
-    extract_to="$HOME/Library/Application Support/Developer/Shared/Xcode/Plug-ins/WakaTime.xcplugin/Contents/Resources"
+    extract_to="$HOME/Library/Application Support/Developer/Shared/Xcode/Plug-ins/iTimeTrack.xcplugin/Contents/Resources"
 fi
-zip_file="$extract_to/wakatime.zip"
-installed_package="$extract_to/wakatime-master"
+zip_file="$extract_to/itimetrack.zip"
+installed_package="$extract_to/itimetrack-master"
 
 if [ -d "$installed_package" ]; then
     rm -rf "$installed_package"
@@ -26,10 +26,10 @@ fi
 
 cd "$extract_to"
 
-echo "Downloading wakatime package to $zip_file ..."
+echo "Downloading itimetrack package to $zip_file ..."
 curl "$url" -o "$zip_file"
 
-echo "Unzipping wakatime.zip to $installed_package ..."
+echo "Unzipping itimetrack.zip to $installed_package ..."
 unzip -o "$zip_file"
 
 rm "$zip_file"

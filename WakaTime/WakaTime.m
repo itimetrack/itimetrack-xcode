@@ -13,8 +13,8 @@
 static NSString *VERSION = @"2.0.9";
 static NSString *XCODE_VERSION = nil;
 static NSString *XCODE_BUILD = nil;
-static NSString *WAKATIME_CLI = @"Library/Application Support/Developer/Shared/Xcode/Plug-ins/WakaTime.xcplugin/Contents/Resources/wakatime-master/wakatime/cli.py";
-static NSString *CONFIG_FILE = @".wakatime.cfg";
+static NSString *WAKATIME_CLI = @"Library/Application Support/Developer/Shared/Xcode/Plug-ins/iTimeTrack.xcplugin/Contents/Resources/itimetrack-master/wakatime/cli.py";
+static NSString *CONFIG_FILE = @".itimetrack.cfg";
 static int FREQUENCY = 2;  // minutes
 
 static WakaTime *sharedPlugin;
@@ -48,7 +48,7 @@ static WakaTime *sharedPlugin;
 
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
-        NSLog(@"Initializing WakaTime plugin v%@ (http://wakatime.com)", VERSION);
+        NSLog(@"Initializing iTimeTrack plugin v%@ (http://itimetrack.com/)", VERSION);
         
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
@@ -76,7 +76,7 @@ static WakaTime *sharedPlugin;
     NSMenuItem *fileMenuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
     if (fileMenuItem) {
         [[fileMenuItem submenu] addItem:[NSMenuItem separatorItem]];
-        NSMenuItem *wakatimeMenuItem = [[NSMenuItem alloc] initWithTitle:@"WakaTime API Key"
+        NSMenuItem *wakatimeMenuItem = [[NSMenuItem alloc] initWithTitle:@"iTimeTrack API Key"
                                                             action:@selector(promptForApiKey)
                                                             keyEquivalent:@""];
         wakatimeMenuItem.target = self;
@@ -150,7 +150,7 @@ static WakaTime *sharedPlugin;
         [arguments addObject:@"--file"];
         [arguments addObject:self.lastFile];
         [arguments addObject:@"--plugin"];
-        [arguments addObject:[NSString stringWithFormat:@"xcode/%@-%@ xcode-wakatime/%@", XCODE_VERSION, XCODE_BUILD, VERSION]];
+        [arguments addObject:[NSString stringWithFormat:@"xcode/%@-%@ xcode-itimetrack/%@", XCODE_VERSION, XCODE_BUILD, VERSION]];
         if (isWrite)
             [arguments addObject:@"--write"];
         [task setArguments: arguments];
@@ -208,7 +208,7 @@ static WakaTime *sharedPlugin;
 // Prompt for api key
 - (void)promptForApiKey {
     NSString *api_key = [self getApiKey];
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Enter your api key from wakatime.com" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Enter your api key from itimetrack.com" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
     if (api_key != NULL) {
         [input setStringValue:api_key];
